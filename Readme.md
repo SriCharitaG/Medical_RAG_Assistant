@@ -1,7 +1,5 @@
-# Mental Heal Chatbot (using Google Gemini Pro)
-This particular application takes a high quality document for mental health allowing the user to write multiline comments and analyze the text to give an assessment. I have leveraged jina AI embedding model available on hugging face which can support large 8192 sequence length and Google's genai pro model for retrieval and augmentation (RAG). I am providing a detailed description below regarding all the components used. 
-
-Link to the application : https://vida-pdf-anwering-machine.streamlit.app/
+# Medical Diagnosis Chatbot (using Google Gemini Pro)
+This particular application creates a vector store from a high quality document for medical symptoms and diagnosis and analyzes multiline text provided by the user to give an assessment. I have leveraged jina AI embedding model available on hugging face which can support large 8192 sequence length and Google's genai pro model as the LLM model for retrieval and augmentation (RAG). I am providing a detailed description below regarding all the components used. 
 
 ## Loading the sentences and embeddings from file:  
 - I have added pretrained embeddings on a high quality document that are saved on an index file and loaded at runtime. 
@@ -17,7 +15,8 @@ Link to the application : https://vida-pdf-anwering-machine.streamlit.app/
 ## Retrieval-Augmented Generation (RAG) :
 - For this purpose I used Google's GenAI Pro model.
 - Initially I created a simple template to let the LLM know what I want as an output. Giving a somewhat detailed explanation is the key for the LLM to provide valid answers in return. The prompt template variable takes the input and the template as input parameters.
-- I then created an LLM chain that takes the LLM model and prompt template as input. Used SimpleSequentialChain to make sequential calls to the model. 
+- I then created an LLM chain that takes the LLM model and prompt template as input. Used SimpleSequentialChain to make sequential calls to the model.
+- To reduce possibility of model hallucination the LLM model is fed inputs a second time giving two responses. 
 
 ## Running the application on Streamlit
 - Streamlit is an open-source Python framework used to create interactive apps.
